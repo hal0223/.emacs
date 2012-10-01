@@ -1,14 +1,11 @@
 ;=======================================
 ; 定数設定
 ;=======================================
-(defconst FONT_FAMILY "ＭＳ ゴシック")	;;フォントファミリ
-;(defconst FONT_FAMILY "BDF M+")	;;フォントファミリ
-(defconst FONT_SIZE 9)			;;フォントサイズ
-(defconst LINE_SPACING 0.2)		;;行間
-; .emacs.dディレクトリパスの指定
-(defconst EMACS_D_DIR "C:/Dropbox/.emacs.d/")
-;CygwinのPath
-(defconst CYGWIN_PATH "C:/cygwin/bin")
+(defconst EMACS_D_DIR "C:/Dropbox/.emacs.d.repo/.emacs.d/")	;; .emacs.dディレクトリパスの指定
+(defconst CYGWIN_PATH "C:/cygwin/bin")				;;CygwinのPath
+(defconst FONT_FAMILY "ＭＳ ゴシック")				;;フォントファミリ
+(defconst FONT_SIZE 9)						;;フォントサイズ
+(defconst LINE_SPACING 0.2)					;;行間
 
 ;=======================================
 ; ロードパスの追加

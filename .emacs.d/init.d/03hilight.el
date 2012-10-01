@@ -8,7 +8,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (set-face-background 'modeline "tomato")            ; アクティブバッファのモードライン色
 (set-face-background 'modeline-inactive "gray64")   ; 非アクティブバッファのモードライン色
-(set-face-background 'mode-line-buffer-id "whilte") ; バッファ名の背景色
+(set-face-background 'mode-line-buffer-id "white") ; バッファ名の背景色
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 対応する括弧の強調 ;;
