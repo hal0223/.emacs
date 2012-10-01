@@ -1,0 +1,9 @@
+﻿toggle-truncate-lines
+replace-string
+moccur
+count-lines-region
+comment-region
+uncomment-region
+turn-on-iimage-mode
+turn-off-iimage-mode
+compile
