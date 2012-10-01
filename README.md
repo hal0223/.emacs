@@ -16,6 +16,7 @@ my emacs configuration
 
 ## 動作確認環境
 - Windows7 32bit/64bit
-- Emacs24.2
+- Emacs 24.2
+- Cygwin 1.7.16
 
 
