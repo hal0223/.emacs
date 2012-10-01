@@ -3,15 +3,15 @@
 
 my emacs configuration
 
-[g—p•û–@]
-1) Windows‚ÌŠÂ‹«•Ï”"HOME"‚É.emacs‚ª’u‚©‚ê‚½ƒfƒBƒŒƒNƒgƒŠ‚ÌƒpƒX‚ğ’Ê‚·
-2) .emacs‚Ì’è”İ’è•”•ª‚ğŠÂ‹«‚É‡‚í‚¹‚Ä‘‚«Š·‚¦‚é
-3) Emacs‚ğƒCƒ“ƒXƒg[ƒ‹‚·‚é
-   ƒ_ƒEƒ“ƒ[ƒh - gnupack (cygwn + emacs package) - SourceForge.JP
+[ä½¿ç”¨æ–¹æ³•]
+1) Windowsã®ç’°å¢ƒå¤‰æ•°"HOME"ã«.emacsãŒç½®ã‹ã‚ŒãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ãƒ‘ã‚¹ã‚’é€šã™
+2) .emacsã®å®šæ•°è¨­å®šéƒ¨åˆ†ã‚’ç’°å¢ƒã«åˆã‚ã›ã¦æ›¸ãæ›ãˆã‚‹
+3) Emacsã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹
+   ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ - gnupack (cygwn + emacs package) - SourceForge.JP
    http://sourceforge.jp/projects/gnupack/releases/?package_id=10839
-   ÀsŒãAemacs\bin\runemacs.exe‚©‚çemacs‚ğ‹N“®‚·‚é
+   å®Ÿè¡Œå¾Œã€emacs\bin\runemacs.exeã‹ã‚‰emacsã‚’èµ·å‹•ã™ã‚‹
 
-[“®ìŠm”FŠÂ‹«]
+[å‹•ä½œç¢ºèªç’°å¢ƒ]
 Windows7 32bit/64bit
 Emacs24.2
 
