@@ -1,11 +1,18 @@
 ;=======================================
 ; 定数設定
 ;=======================================
-(defconst EMACS_D_DIR "C:/Dropbox/.emacs.d.repo/.emacs.d/")	;; .emacs.dディレクトリパスの指定
-(defconst CYGWIN_PATH "C:/cygwin/bin")				;;CygwinのPath
-(defconst FONT_FAMILY "ＭＳ ゴシック")				;;フォントファミリ
-(defconst FONT_SIZE 9)						;;フォントサイズ
-(defconst LINE_SPACING 0.2)					;;行間
+; .emacs.dディレクトリパスの指定
+(defconst EMACS_D_DIR "C:/Dropbox/.emacs.d/.emacs.d/")
+;CygwinのPath
+(defconst CYGWIN_PATH "C:/cygwin/bin")
+(defconst FONT_FAMILY "ＭＳ ゴシック")	;;フォントファミリ
+(defconst FONT_SIZE 9)			;;フォントサイズ
+(defconst LINE_SPACING 0.2)		;;行間
+; 起動時のフレームサイズと位置
+(defconst LOCATION_Y 0)		;; フレームの左上座標Y(pixel)
+(defconst LOCATION_X 80)	;; フレームの左上座標X(pixel)
+(defconst COL_NUM 100)		;; フレーム幅(列数)
+(defconst ROW_NUM 50)		;; フレーム高(行数)
 
 ;=======================================
 ; ロードパスの追加
@@ -16,7 +23,7 @@
 ;=======================================
 ; デバッガー
 ;=======================================
-(setq debug-on-error t)
+;(setq debug-on-error t)
 
 ;=======================================
 ; ファイルリスト更新スクリプト
