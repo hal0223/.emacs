@@ -12,7 +12,8 @@
 ;; sdic
 (global-set-key [(C c)(C i)] 'sdic-describe-word)
 (global-set-key [(C c)(C u)] 'sdic-describe-word-at-point)
-
+;;ミニバッファでファイル名入力時に一つ上のディレクトリへ
+(define-key minibuffer-local-filename-completion-map "\C-p" 'up-dir)
 ;;;;;;;;;;
 ;; 設定 ;;
 ;;;;;;;;;;
@@ -39,6 +40,33 @@
              (progn
                (local-set-key "\C-t" 'other-window)
                )))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 現在のカーソルから/、\までの文字列を削除する ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun up-dir ()
+	"現在のカーソルから/、\までの文字列を削除する"
+	(interactive )
+	(backward-char)
+	(if
+	    (or 
+	     (equal "\\" (format "%c" (following-char)))
+	     (equal "/" (format "%c" (following-char))) )
+	   (progn
+	     (delete-char 1)
+	     (backward-char)
+	     )
+	  )
+	(while
+	    (and 
+	     (not (equal "\\" (format "%c" (following-char))))
+	     (not (equal "/" (format "%c" (following-char))))
+	     )
+	  (delete-char 1)
+	  (backward-char)
+	  )
+	(forward-char)
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; バイトコンパイル ;;

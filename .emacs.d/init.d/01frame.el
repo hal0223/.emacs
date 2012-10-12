@@ -32,6 +32,9 @@
 ;; スタートアップメッセージを消す
 (setq inhibit-startup-message t)
 
+;; 行折り返しマークの設定 no-fringes,minimal,half-width
+(setq fringe-styles "right-only")
+
 ;;;;;;;;;;;;;;;;;;
 ;; 透明度の調整 ;;
 ;;;;;;;;;;;;;;;;;;

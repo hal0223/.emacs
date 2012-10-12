@@ -9,6 +9,9 @@
 ;; dired編集モード(wdired)に入る
 (require 'wdired)
 (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)
+;; ファイルの移動
+(define-key dired-mode-map "\S-r" 'dired-do-rename)
+(define-key dired-mode-map "\S-m" 'dired-do-rename)
 ;; 新規バッファを作らずにディレクトリを開く
 (define-key dired-mode-map "m" 'dired-my-advertised-find-file)
 (define-key dired-mode-map "\C-m" 'dired-my-advertised-find-file)

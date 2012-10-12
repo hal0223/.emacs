@@ -9,6 +9,7 @@
 ;;;;;;;;;;;;;;;;;;
 ;カレントノードのレベルを上げる (ref.)サブノードも含む場合は C-M-→
 (define-key org-mode-map [(meta f)] 'org-metaright)
+
 ;カレントノードのレベルを下げる (ref.)サブノードも含む場合は C-M-←
 (define-key org-mode-map [(meta b)] 'org-metaleft)
 ;同レベルのセクションを下に作成

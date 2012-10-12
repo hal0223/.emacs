@@ -20,11 +20,18 @@
 (global-set-key [(M p)] 'scroll-down-line)
 ;; 指定行へ移動
 (global-set-key [(C c)(C l)] 'goto-line)
+;; 括弧入力時に、対応する括弧を自動挿入する
+(global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
+(global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
+(global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
+(global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
+(global-set-key (kbd "'") 'skeleton-pair-insert-maybe)
+(setq skeleton-pair 1)
 
 ;;;;;;;;;;
 ;; 設定 ;;
 ;;;;;;;;;;
-;; kill-ringを拡張
+;; 拡張kill-ring
 (require 'browse-kill-ring)
 ;; 検索において，大文字・小文字の区別しない．
 (setq-default case-fold-search t)
