@@ -1,12 +1,10 @@
 ﻿;;;;;;;;;;;;;;;;;;
 ;; バッファ関連 ;;
 ;;;;;;;;;;;;;;;;;;
-;; ウィンドウ移動
-(global-set-key  [(C t)] 'other-window)
 ;; バッファ再読込
 (global-set-key [F5] 'revert-buffer)
 ;; バッファー削除
-(define-key global-map [(C x) (C k)] 'kill-this-buffer)
+(define-key global-map (kbd "M-k") 'kill-this-buffer)
 ;; バッファーのelisp評価
 (global-set-key [(C j)] 'eval-buffer)
 ;; バッファサイズ変更
@@ -15,7 +13,7 @@
 (define-key global-map [(S M f)] 'enlarge-window-horizontally)
 (define-key global-map [(S M b)] 'shrink-window-horizontally)
 ;;行折り返し
-(global-set-key  [(C c)(C r)] 'toggle-truncate-lines)
+(global-set-key [(C c)(C r)] 'toggle-truncate-lines)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; scratchバッファの内容を保持する ;;

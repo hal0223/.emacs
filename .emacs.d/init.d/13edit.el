@@ -7,7 +7,7 @@
 ;;;;;;;;;;;;;;;;;;
 ;; Undo
 (global-set-key [(C z)] 'undo)
-;; Ctrl-Hでバックスペース
+;; C-hで後ろへ1文字削除
 (global-set-key [(C h)] 'backward-delete-char)
 ;; 拡張kill-ring
 (global-set-key [(C M y)] 'browse-kill-ring)
@@ -31,6 +31,8 @@
 ;;;;;;;;;;
 ;; 設定 ;;
 ;;;;;;;;;;
+;; リージョンを削除できるように
+(delete-selection-mode t)
 ;; 拡張kill-ring
 (require 'browse-kill-ring)
 ;; 検索において，大文字・小文字の区別しない．

@@ -12,19 +12,42 @@
 ;;;;;;;;;;;;;;;;;;
 ;; キーバインド ;;
 ;;;;;;;;;;;;;;;;;;
-;; TODO: キーバインドを調べる作業をしあわせにしてくれる
-;; (require 'descbinds-anything)
-;(define-key global-map [(C \;)] 'buffer-anything)
-(define-key global-map [(C \;)] 'my-anything)
-(define-key global-map [(C \:)] 'my-favo-anything)
-(define-key global-map [(M \;)] 'anything-c-source-emacs-functions)
-;(define-key global-map [(C M s)] 'anything-c-moccur-occur-by-moccur);moccur
-
-;(define-key global-map [(C M s)] 'dmoccur)
-;(define-key global-map [(C c)(C w)] 'anything-show-w3m-bookmarks-only)
-;(define-key global-map [(C S s)] 'anything-do-grep);;#TODO:anything grep
-(define-key anything-map [(C \;)] 'anything-next-source)
+;; 現在開いているバッファ
+(define-key global-map [(C \;)] 'open-buffer-anything)
+;; 過去に開いたバッファ
+(define-key global-map [(C \:)] 'buffer-history-anything)
+;; moccur検索
+(define-key global-map [(M s)] 'anything-c-moccur-occur-by-moccur)
+;; C-hで後ろへ1文字削除
 (define-key anything-map [(C h)] 'delete-backward-char)
+;; Grepと同機能だけど重い、かつ指定ディレクトリのバッファをすべて開く
+(define-key global-map [(C M s)] 'dmoccur)
+;; 複数ソースがある場合次のソースへ
+(define-key anything-map [(C \;)] 'anything-next-source)
+
+;;;;;;;;;;;;
+;; moccur ;;
+;;;;;;;;;;;;
+;;; color-moccur.elの設定
+(require 'color-moccur)
+;; 複数の検索語や、特定のフェイスのみマッチ等の機能を有効にする
+;; (cf.) http://www.bookshelf.jp/soft/meadow_50.html#SEC751
+(setq moccur-split-word t)
+(setq moccur-grep-default-word-near-point nil)
+(setq moccur-kill-moccur-buffer t)
+
+ ;;;;;;;;;;;;;;;;;;;;;
+ ;; ソースの追加    ;;
+ ;;;;;;;;;;;;;;;;;;;;;
+;; (add-to-list 'anything-sources 'anything-c-source-emacs-commands)
+;;     anything-c-source-extended-command-history
+;;     anything-c-source-filelist
+;;     anything-c-source-emacs-commands
+;;     anything-c-source-info-pages
+;;     anything-c-source-info-elisp
+;;     anything-c-source-man-pages
+;;     anything-c-source-locate
+;;     anything-c-source-emacs-functions
 
  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
  ;; favorite-anything-commands ;;
@@ -36,54 +59,35 @@
     (type . command)))
 ;; (anything 'anything-c-source-favorite-commands')
 
- ;;;;;;;;;;;;;;;;;;;;;
- ;; ソースの追加    ;;
- ;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'anything-sources 'anything-c-source-emacs-commands)
-
- ;;;;;;;;;;;;;;;;;;;;;
- ;; buffer-anything ;;
- ;;;;;;;;;;;;;;;;;;;;;
-(defun my-anything ()
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;
+ ;; open-buffer-anything ;;
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun open-buffer-anything ()
   (interactive)
   (anything-other-buffer
    '(
      anything-c-source-buffers+
-     anything-c-source-extended-command-history
-     anything-c-source-recentf
-     anything-c-source-filelist
-;;     anything-c-source-emacs-commands
-;;     anything-c-source-info-pages
-;;     anything-c-source-info-elisp
-;;     anything-c-source-man-pages
-;;     anything-c-source-locate
-;;     anything-c-source-emacs-functions
+     anything-c-source-favorite-commands
      )
-   "*my-anything* ")
+   "*open-anything* ")
   )
 
-;;;;;;;;;;;;;;;;;;;;;;
-;; my-favo-anything ;;
-;;;;;;;;;;;;;;;;;;;;;;
-(defun my-favo-anything ()
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; buffer-history-anything ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun buffer-history-anything ()
   (interactive)
   (anything-other-buffer
    '(
-     anything-c-source-favorite-commands
+    anything-c-source-recentf
+;;    anything-c-source-favorite-commands
      )
-   "*my-favorite-anything* ")
+   "buffer-history-anything* ")
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; anything-C-Occur ;;
 ;;;;;;;;;;;;;;;;;;;;;;
-;;; color-moccur.elの設定
-(require 'color-moccur)
-;; 複数の検索語や、特定のフェイスのみマッチ等の機能を有効にする
-;; 詳細は http://www.bookshelf.jp/soft/meadow_50.html#SEC751
-(setq moccur-split-word t)
-(setq moccur-grep-default-word-near-point nil)
-
 ;; migemoがrequireできる環境ならmigemoを使う
 (when (require 'migemo nil t) ;第三引数がnon-nilだとloadできなかった場合にエラーではなくnilを返す
   (setq moccur-use-migemo t))
@@ -94,7 +98,7 @@
 (setq anything-c-moccur-anything-idle-delay 0.2		;anything-idle-delay
       anything-c-moccur-higligt-info-line-flag t	; anything-c-moccur-dmoccurなどのコマンドでバッファの情報をハイライトする
       anything-c-moccur-enable-auto-look-flag t		; 現在選択中の候補の位置を他のwindowに表示する
-      anything-c-moccur-enable-initial-pattern t	;anything-c-moccur-occur-by-moccurの起動時にポイントの位置の単語を初期パターンにする
+      anything-c-moccur-enable-initial-pattern 	;anything-c-moccur-occur-by-moccurの起動時にポイントの位置の単語を初期パターンにする
 )
 
  ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -116,9 +120,10 @@
     (requires-pattern . 2)
     (type . file)))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 入力が終わった後にanything検索を行う ;;
-;; ※重い場合はコメントを外す           ;;
+;; ※動作が重い場合にコメントアウトする ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (defadvice anything-check-minibuffer-input (around sit-for activate)
 ;;   (if (sit-for anything-idle-delay t)

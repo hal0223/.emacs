@@ -13,16 +13,15 @@
 (define-key dired-mode-map "\S-r" 'dired-do-rename)
 (define-key dired-mode-map "\S-m" 'dired-do-rename)
 ;; 新規バッファを作らずにディレクトリを開く
-(define-key dired-mode-map "m" 'dired-my-advertised-find-file)
 (define-key dired-mode-map "\C-m" 'dired-my-advertised-find-file)
 ;; 上の階層に移動
 (define-key dired-mode-map "c" 'dired-my-up-directory)
 (define-key dired-mode-map "^" 'dired-my-up-directory)
 ;; C-tでバッファを移動
 (define-key dired-mode-map "\C-t" 'other-window)
-;; [Windowsのみ]関連付けられたソフトで開く 
+;; [Windowsのみ]関連付けられたソフトで開く
 (if (equal system-type 'windows-nt)
-    (define-key dired-mode-map "z" 'dired-fiber-find)
+    (define-key dired-mode-map "w" 'dired-fiber-find)
 )
 ;; ソートする
 (add-hook 'dired-mode-hook
@@ -36,7 +35,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 設定                                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;http://d.hatena.ne.jp/kakurasan/20070702/p1
+; 削除したらゴミ箱へ
+(setq delete-by-moving-to-trash t)
+; http://d.hatena.ne.jp/kakurasan/20070702/p1
 (require 'ls-lisp)
 (setq ls-lisp-dirs-first t)
 ;; ディレクトリを再帰的にコピー可能にする

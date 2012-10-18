@@ -5,10 +5,20 @@
 ;;;;;;;;;;;;;;;;;;
 ;; キーバインド ;;
 ;;;;;;;;;;;;;;;;;;
-;;[C-7]透明化解除
+;;透明化解除
 (global-set-key (kbd "C-7") (lambda() (interactive) (my-gradual-modify-transparency)))
-;;[C-8]透明化
+;;透明化
 (global-set-key (kbd "C-8") (lambda() (interactive) (my-gradual-modify-transparency t)))
+;; ウィンドウ移動
+(global-set-key  [(C t)] 'other-window)
+;; ウィンドウ削除
+(define-key global-map (kbd "C-0") 'delete-window)
+;; フォーカスウィンドウ以外を削除
+(define-key global-map (kbd "C-1") 'delete-other-windows)
+;; ウィンドウを横に分割
+(define-key global-map (kbd "C-2") 'split-window-below)
+;; ウィンドウを縦に分割
+(define-key global-map (kbd "C-3") 'split-window-right)
 
 ;;;;;;;;;;;;;;;;;;
 ;; 設定         ;;
@@ -31,10 +41,8 @@
 (tool-bar-mode 0)
 ;; スタートアップメッセージを消す
 (setq inhibit-startup-message t)
-
-;; 行折り返しマークの設定 no-fringes,minimal,half-width
-(setq fringe-styles "right-only")
-
+;; 行折り返しマークの設定を右のみに表示
+(set-fringe-style   `(0) )
 ;;;;;;;;;;;;;;;;;;
 ;; 透明度の調整 ;;
 ;;;;;;;;;;;;;;;;;;

@@ -21,8 +21,6 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; スクロールバーを右側に
 (set-scroll-bar-mode 'right)
-;; リージョンを削除できるように
-(delete-selection-mode t)
 ;; isearch のハイライトの反応をよくする
 (setq isearch-lazy-highlight-initial-delay 0)
 ;;ウィンドウ切り替えを循環させる
