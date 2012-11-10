@@ -32,21 +32,43 @@
 ;;;=======================================
 ;; 動的にフォントサイズを変更する
 ;;;=======================================
-(defun bigger-font-size ()
-	"set the font size bigger than defalut size."
-	(interactive )
-	(setq FONT_SIZE (+ FONT_SIZE 0.5) )
-	(set-default-font (concat FONT_FAMILY "-" (format "%.1f" FONT_SIZE )))
-	(message "set the  font sizeis %.1f" FONT_SIZE )
-)
-
+;;フォントサイズ小さく
 (defun smaller-font-size ()
 	"set the font size smaller than defalut size."
 	(interactive )
-	(setq FONT_SIZE (- FONT_SIZE 0.5) )
-	(set-default-font (concat FONT_FAMILY "-" (format "%.1f" FONT_SIZE ) ))
-	(message "set the font size is %.1f" FONT_SIZE )
+	(save-size)
+	(setq FONT_SIZE (- FONT_SIZE 1.0) )
+	(set-default-font (concat FONT_FAMILY "-" (format "%.1f" FONT_SIZE )))
+	(resize-frame)
 )
+
+;;フォントサイズ大きく
+(defun bigger-font-size ()
+	"set the font size bigger than defalut size."
+	(interactive )
+	(save-size)
+	(setq FONT_SIZE (+ FONT_SIZE 1.0) )
+	(set-default-font (concat FONT_FAMILY "-" (format "%.1f" FONT_SIZE )))
+	(resize-frame)
+)
+
+;;現在のフレームサイズを保存
+(defun save-size ()
+	 ""
+	(setq fw (* (frame-width) (frame-char-width)))
+	(setq fh (* (frame-height) (frame-char-height)))
+)
+;; フォントサイズを変更した時に
+;; 追従してフレームサイズが変わるので
+;; フレームサイズを再設定する
+(defun resize-frame () ""
+	(interactive )
+	(setq col (/ fw (frame-char-width) ) )
+	(setq row (/ fh (frame-char-height) ) )
+	(set-frame-size (selected-frame) col row)
+)
+;;フレームサイズが変更されたときは保存する
+(add-hook 'window-configuration-change-hook '(lambda ()(save-size)))
 
 ;=======================================
 ; 動的に行間を変更する

@@ -28,6 +28,10 @@
 (define-key org-mode-map (kbd "[") 'skeleton-pair-insert-maybe)
 (define-key org-mode-map (kbd "\"") 'skeleton-pair-insert-maybe)
 (define-key org-mode-map (kbd "'") 'skeleton-pair-insert-maybe)
+;; 行頭へ
+(define-key org-mode-map "\C-a" 'org-seq-home)
+;; 行末へ
+(define-key org-mode-map "\C-e" 'org-seq-end)
 
 ;;;;;;;;;;
 ;; 設定 ;;

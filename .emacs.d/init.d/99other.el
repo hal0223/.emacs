@@ -99,12 +99,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; 自動インストール ;;
 ;;;;;;;;;;;;;;;;;;;;;;
-(require 'auto-install)
-(setq auto-install-directory (concat EMACS_D_DIR "elisp/"))
-;起動時にemacswiki-packageを更新する
-;(auto-install-update-emacswiki-package-name t)
-;互換性確保
-(auto-install-compatibility-setup)
+;; (require 'auto-install)
+;; (setq auto-install-directory (concat EMACS_D_DIR "elisp/"))
+;; ;起動時にemacswiki-packageを更新する
+;; (auto-install-update-emacswiki-package-name t)
+;; ;互換性確保
+;; (auto-install-compatibility-setup)
 
 ;; ;;;;;;;;;;
 ;; ;; sdic ;;

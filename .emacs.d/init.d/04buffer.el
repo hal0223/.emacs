@@ -5,6 +5,7 @@
 (global-set-key [F5] 'revert-buffer)
 ;; バッファー削除
 (define-key global-map (kbd "M-k") 'kill-this-buffer)
+(global-set-key [C-f4] 'kill-this-buffer) 
 ;; バッファーのelisp評価
 (global-set-key [(C j)] 'eval-buffer)
 ;; バッファサイズ変更
