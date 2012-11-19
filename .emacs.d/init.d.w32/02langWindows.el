@@ -22,15 +22,14 @@
 (setq mw32-ime-mode-line-state-indicator-list '("[--]" "[J]" "[--]"))
 ;;ここまでは mw32-ime-initialize の前に入れる
 
-(when (equal emacs-major-version 21) (require 'un-define))
 (set-language-environment "Japanese")
-(set-default-coding-systems 'sjis)
-(set-terminal-coding-system 'sjis)
-(set-keyboard-coding-system 'japanese-shift-jis)
-(set-keyboard-coding-system 'sjis)
-(setq file-name-coding-system 'sjis)
-(set-clipboard-coding-system 'sjis-dos)
-(set-w32-system-coding-system 'sjis-dos)
+;; (set-default-coding-systems 'sjis)
+;; (prefer-coding-system 'sjis)
+;; (set-terminal-coding-system 'sjis)
+;; (set-keyboard-coding-system 'sjis)
+;; (setq file-name-coding-system 'sjis)
+;; (set-clipboard-coding-system 'sjis-dos)
+;; (set-w32-system-coding-system 'sjis-dos)
 
 (set-input-method "W32-IME")
 (w32-ime-initialize)  ;; IME の初期化
@@ -44,3 +43,4 @@
               (setq default-file-name-coding-system 'utf-8))
             (when (equal "Japanese" current-language-environment)
               (setq default-buffer-file-coding-system 'iso-2022-jp))))
+
