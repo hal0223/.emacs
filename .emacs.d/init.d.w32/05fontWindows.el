@@ -69,7 +69,7 @@
 )
 
 ;;フレームサイズが変更されたときは保存する
-(add-hook 'window-configuration-change-hook '(lambda ()(save-size)))
+(add-hook 'window-size-change-hook '(lambda ()(save-size)))
 
 ;=======================================
 ; 動的に行間を変更する

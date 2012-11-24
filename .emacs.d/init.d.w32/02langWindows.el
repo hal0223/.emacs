@@ -1,7 +1,7 @@
 ;;;=======================================
 ;;;言語・文字コードの設定
 ;;;=======================================
-(setenv "LANG" "ja_JP.sjis")
+;(setenv "LANG" "ja_JP.sjis")
 ;;; IME ON/OFF 時にカーソル色を変える。
 (setq ime-activate-cursor-color "Deep Sky Blue")
 (setq ime-inactivate-cursor-color "Deep Pink")

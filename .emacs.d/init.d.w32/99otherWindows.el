@@ -8,8 +8,8 @@
 (require 'cygwin-mount)
 (cygwin-mount-activate)
 
-(require 'multi-term)
-(setq explicit-shell-file-name (concat CYGWIN_PATH "/bash.exe"))
+;(require 'multi-term)
+;(setq explicit-shell-file-name (concat CYGWIN_PATH "/bash.exe"))
 
 
 ;; (add-hook 'comint-output-filter-functions 'shell-strip-ctrl-m nil t)
