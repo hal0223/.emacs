@@ -5,17 +5,53 @@
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; ロードパスの設定 ;;
 ;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (concat EMACS_D_DIR "elisp/anything-config"))
-(add-to-list 'load-path (concat EMACS_D_DIR "elisp/anything-config/extensions"))
-(require 'anything-startup)
+(add-to-list 'load-path (concat EMACS_D_DIR "elisp/anything"))
+(add-to-list 'load-path (concat EMACS_D_DIR "elisp/anything/developer-tools"))
+(add-to-list 'load-path (concat EMACS_D_DIR "elisp/anything/extensions"))
+
+;;;;;;;;;;;;;;;;;;;;;;
+;; require
+;;;;;;;;;;;;;;;;;;;;;;
+;;; Note: anything-config.el loads anything.el.
+(require 'anything-config)
+
+;;; anything-match-plugin.el extends pattern matching. Some Anything
+;;; Applications requires it. It is a must-have plugin now.
+(require 'anything-match-plugin)
+
+;;; anything-complete.el replaces various completion with anything
+;;; (like Icicles). Use Anything power for normal completion.
+(when (require 'anything-complete nil t)
+  ;; Automatically collect symbols by 150 secs
+  (anything-lisp-complete-symbol-set-timer 150)
+  (define-key emacs-lisp-mode-map "\C-\M-i" 'anything-lisp-complete-symbol-partial-match)
+  (define-key lisp-interaction-mode-map "\C-\M-i" 'anything-lisp-complete-symbol-partial-match)
+  ;; Comment if you do not want to replace completion commands with `anything'.
+  (anything-read-string-mode 1)
+  )
+
+;;; anything-show-completion.el shows current selection prettily.
+(require 'anything-show-completion)
+
+;;; anything-auto-install.el integrates auto-install.el with anything.
+(require 'anything-auto-install nil t)
+
+;;; descbinds-anything.el replaces describe-bindings with anything interface.
+(when (require 'descbinds-anything nil t)
+  ;; Comment if you do not want to replace `describe-bindings' with `anything'.
+  (descbinds-anything-install)
+  )
+
+;;; `anything-grep' replaces standard `grep' command.
+(require 'anything-grep nil t)
 
 ;;;;;;;;;;;;;;;;;;
 ;; キーバインド ;;
 ;;;;;;;;;;;;;;;;;;
-;; 現在開いているバッファ
-(define-key global-map [(C \;)] 'open-buffer-anything)
-;; 過去に開いたバッファ
-(define-key global-map [(C \:)] 'buffer-history-anything)
+;; 現在開いているバッファ・過去に開いたバッファ
+(define-key global-map [(C \;)] 'main-anything)
+;; 登録済みコマンド
+(define-key global-map [(M \;)] 'sub-anything)
 ;; moccur検索
 (define-key global-map [(M s)] 'anything-c-moccur-occur-by-moccur)
 ;; C-hで後ろへ1文字削除
@@ -24,6 +60,8 @@
 (define-key global-map [(C M s)] 'dmoccur)
 ;; 複数ソースがある場合次のソースへ
 (define-key anything-map [(C \;)] 'anything-next-source)
+;;デフォルトのプレフィックス"F5 a"から"F6 a"へ変更
+(setq anything-command-map-prefix-key "<F6> a")
 
 ;;;;;;;;;;;;
 ;; moccur ;;
@@ -60,29 +98,29 @@
 ;; (anything 'anything-c-source-favorite-commands')
 
  ;;;;;;;;;;;;;;;;;;;;;;;;;;
- ;; open-buffer-anything ;;
+ ;; main-anything
  ;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun open-buffer-anything ()
+(require 'recentf-ext)
+(defun main-anything ()
   (interactive)
   (anything-other-buffer
    '(
+     anything-c-source-recentf
      anything-c-source-buffers+
-     anything-c-source-favorite-commands
      )
-   "*open-anything* ")
+   "*main-anything* ")
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; buffer-history-anything ;;
+;; sub-anything
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun buffer-history-anything ()
+(defun sub-anything ()
   (interactive)
   (anything-other-buffer
    '(
-    anything-c-source-recentf
-;;    anything-c-source-favorite-commands
+     anything-c-source-favorite-commands
      )
-   "buffer-history-anything* ")
+   "*sub-anything* ")
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;

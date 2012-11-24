@@ -70,18 +70,18 @@
 ;;          ) auto-mode-alist))
 
 ;; ;;; PHP開発で追加しておきたいEmacs Lisp 8選 : アシアルブログ http://blog.asial.co.jp/190
-;; ;;;;;;;;;;;;;;
-;; ;; php-mode ;;
-;; ;;;;;;;;;;;;;;
-;; ;;; 設定例
-;; (require 'php-mode);(autoload 'php-mode "php-mode")
-;; (setq auto-mode-alist
-;;       (cons '("\\.php\\'" . php-mode) auto-mode-alist))
-;; (setq php-mode-force-pear t)
-;; (add-hook 'php-mode-user-hook
-;;           '(lambda ()
-;; ;;;(setq php-manual-path "/usr/local/share/php/doc/html")
-;;              (setq php-manual-url "http://www.phppro.jp/phpmanual/")))
+;;;;;;;;;;;;;;
+;; php-mode ;;
+;;;;;;;;;;;;;;
+;;; 設定例
+(require 'php-mode);(autoload 'php-mode "php-mode")
+(setq auto-mode-alist
+      (cons '("\\.php\\'" . php-mode) auto-mode-alist))
+(setq php-mode-force-pear t)
+(add-hook 'php-mode-user-hook
+          '(lambda ()
+;;;(setq php-manual-path "/usr/local/share/php/doc/html")
+             (setq php-manual-url "http://www.phppro.jp/phpmanual/")))
 
 ;; ;;;;;;;;;;;;;;
 ;; ;; css-mode ;;

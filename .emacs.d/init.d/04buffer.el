@@ -16,6 +16,8 @@
 ;;行折り返し
 (global-set-key [(C c)(C r)] 'toggle-truncate-lines)
 
+(setq default-major-mode 'text-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; scratchバッファの内容を保持する ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -6,9 +6,14 @@
 ;; 各フェイスの色設定               ;;
 ;; (ref.) M-x, list-faces-display ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(set-background-color "whilte")
+(set-face-foreground 'modeline "white")             ; アクティブバッファのモードライン文字色
 (set-face-background 'modeline "tomato")            ; アクティブバッファのモードライン色
-(set-face-background 'modeline-inactive "gray64")   ; 非アクティブバッファのモードライン色
-(set-face-background 'mode-line-buffer-id "white") ; バッファ名の背景色
+(set-face-background 'mode-line-buffer-id "white")  ; バッファ名の背景色
+(set-face-foreground 'mode-line-buffer-id "black") ; バッファ名の背景色
+(set-face-background 'modeline-inactive "gray80")   ; 非アクティブバッファのモードライン色
+
+;(load-file (concat EMACS_D_DIR "elisp/hiwin.el"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 対応する括弧の強調 ;;
