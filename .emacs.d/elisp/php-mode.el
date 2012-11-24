@@ -1,4 +1,4 @@
-﻿;;; php-mode.el --- major mode for editing PHP code
+;;; php-mode.el --- major mode for editing PHP code
 
 ;; Copyright (C) 1999, 2000, 2001, 2003, 2004 Turadg Aleahmad
 ;;               2008 Aaron S. Hawley

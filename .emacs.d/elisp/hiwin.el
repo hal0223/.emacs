@@ -1,9 +1,9 @@
-﻿(defvar hiwin-color       "#322B2B")  ;; 非アクティブwindowの背景色
-(defvar hiwin-overlay-num  8)        ;; 非アクティブwindowのoverlay数
-(defvar hiwin-face         nil)      ;; 非アクティブwindow用face
-(defvar hiwin-overlay      nil)      ;; 非アクティブwindow用overlay
-(defvar hiwin-window       nil)      ;; アクティブwindowのwindow
-(defvar hiwin-buffer       nil)      ;; アクティブwindowのbuffer
+﻿(defvar hiwin-color       "floral white") ;; 非アクティブwindowの背景色
+(defvar hiwin-overlay-num  8)             ;; 非アクティブwindowのoverlay数
+(defvar hiwin-face         nil)           ;; 非アクティブwindow用face
+(defvar hiwin-overlay      nil)           ;; 非アクティブwindow用overlay
+(defvar hiwin-window       nil)           ;; アクティブwindowのwindow
+(defvar hiwin-buffer       nil)           ;; アクティブwindowのbuffer
 (defvar hiwin-ignore-buffer '("+draft/1" "+draft/2" "+draft/3"))
 
 (defun hiwin-init ()

@@ -1,4 +1,4 @@
-﻿#!/usr/local/bin/ruby
+#!/usr/local/bin/ruby
 # Make almost all filelist in my computer
 #
 # Features
@@ -20,41 +20,30 @@
 # ==== Customize Variables ====
 # Exclude pathnames (version control system directories and so on)
 $EXCLUDE_PATH = %w[
-. ..  lost+found tmp temp 
- autom4te.cache blib _build .bzr .cdv cover_db 
- CVS _darcs ~.dep ~.dot .git .hg ~.nib .pc ~.plst RCS SCCS _sgbak .svn
- .bk 
+. ..  lost+found tmp temp
+autom4te.cache blib _build .bzr .cdv cover_db CVS _darcs ~.dep ~.dot .git .hg ~.nib .pc ~.plst RCS SCCS _sgbak .svn
 ]
 
 # Exclude regexps (backup files, core files, and so on)
 $EXCLUDE_REGEXP = Regexp.union(/~$/, /\#.+\#$/, /[._].*\.swp$/, /core\.\d+$/)
 
 # Set default directories to collect
-$LS_DIRS = ["~/0.working",  "~/0.working/.emacs.d", "~/0.working/knowledge" ]
-# $LS_DIRS = [
-#   "~/emacs/init.d", "~/emacs/lisp", "~/.emacs.d", "~/emacs",
-#   "~/gdgd", "~/memo", "~/book", "~/src", "~/public_html", "~/private_html", "~",
-#   "/m/usr/share/emacs/23.1.50", "/m/usr/share/emacs/site-lisp", "/m/log/emacswikipages",
-#   "/m/home/local/lib/ruby19", "/m/home/local/lib/ruby", "/m/log/compile/ruby19", "/m/log/compile/ruby18",
-#   "/m/log/compile", "/m/log", "/m/home/local", "/m/home/nobackup",
-#   "/m/usr", "/etc", "/m/home/archives", "/m/l/var",
-#   "/"
-# ]
+$LS_DIRS = ["~", "/"]
 # ==== End of Customize Variables =====
 
 begin load "~/.make-filelist.rb"; rescue LoadError; end # Load configuration file
 $done = []                                              # Already collected directory
 def ls(dir)
-  if $done.include? dir
+  if $done.include? dir or not File.readable? dir
     $stderr.puts "skipped #{dir}" if $VERBOSE
     return
   end
   dirs = []
   Dir.foreach(dir) do |f|
-    next if $EXCLUDE_PATH.include? f
-    next if $EXCLUDE_REGEXP.match f
-    f = File.join dir, f
     begin
+      next if $EXCLUDE_PATH.include? f
+      next if $EXCLUDE_REGEXP.match f
+      f = File.join dir, f
       stat = File.lstat f
       abbrev = f.sub(ENV['HOME'], '~') if ENV['HOME']
       if stat.directory? and not stat.symlink?
@@ -64,7 +53,7 @@ def ls(dir)
         puts abbrev
       end
     rescue
-      $stderr.puts $!
+      $stderr.puts "#{dir}/#{f}: #$!"
     end
   end
   dirs.each do |d|

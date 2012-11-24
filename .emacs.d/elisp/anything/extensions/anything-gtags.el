@@ -1,4 +1,4 @@
-﻿;;; anything-gtags.el --- GNU GLOBAL anything.el interface
+;;; anything-gtags.el --- GNU GLOBAL anything.el interface
 ;; $Id: anything-gtags.el,v 1.27 2010-02-06 12:33:13 rubikitch Exp $
 
 ;; Copyright (C) 2008, 2009, 2010  rubikitch

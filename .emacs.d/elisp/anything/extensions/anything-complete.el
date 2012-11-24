@@ -1,4 +1,4 @@
-﻿;;; anything-complete.el --- completion with anything
+;;; anything-complete.el --- completion with anything
 ;; $Id: anything-complete.el,v 1.86 2010-03-31 23:14:13 rubikitch Exp $
 
 ;; Copyright (C) 2008, 2009, 2010, 2011 rubikitch
@@ -118,17 +118,6 @@
 (require 'thingatpt)
 (require 'anything-obsolete)
 
-;; version check
-(let ((version "1.263"))
-  (when (and (string= "1." (substring version 0 2))
-             (string-match "1\.\\([0-9]+\\)" anything-version)
-             (< (string-to-number (match-string 1 anything-version))
-                (string-to-number (substring version 2))))
-    (error "Please update anything.el!!
-
-http://www.emacswiki.org/cgi-bin/wiki/download/anything.el
-
-or  M-x install-elisp-from-emacswiki anything.el")))
 
 ;; (@* "overlay")
 (when (require 'anything-show-completion nil t)
@@ -286,7 +275,8 @@ used by `anything-lisp-complete-symbol-set-timer' and `anything-apropos'"
 (defun alcs-describe-function (name)
   (describe-function (anything-c-symbolify name)))
 (defun alcs-describe-variable (name)
-  (describe-variable (anything-c-symbolify name)))
+  (with-current-buffer anything-current-buffer
+    (describe-variable (anything-c-symbolify name))))
 (defun alcs-describe-face (name)
   (describe-face (anything-c-symbolify name)))
 (defun alcs-customize-face (name)
@@ -376,7 +366,9 @@ used by `anything-lisp-complete-symbol-set-timer' and `anything-apropos'"
     anything-c-source-complete-emacs-faces))
 
 (defvar anything-apropos-sources
-  '(anything-c-source-apropos-emacs-commands
+  '(anything-c-source-emacs-function-at-point
+    anything-c-source-emacs-variable-at-point
+    anything-c-source-apropos-emacs-commands
     anything-c-source-apropos-emacs-functions
     anything-c-source-apropos-emacs-variables
     anything-c-source-apropos-emacs-faces))
@@ -583,7 +575,7 @@ used by `anything-lisp-complete-symbol-set-timer' and `anything-apropos'"
       (anything-old-completing-read prompt collection predicate require-match initial hist default inherit-input-method)
     ;; support only collection list.
     (setq hist (or (car-safe hist) hist))
-    (let* (anything-input-idle-delay
+    (let* ((anything-input-idle-delay 0.1)
            (result (or (anything-noresume (acr-sources
                                            prompt
                                            collection

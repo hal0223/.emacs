@@ -1,4 +1,4 @@
-﻿;;;; anything-obsolete.el --- obsolete functions of anything
+;;;; anything-obsolete.el --- obsolete functions of anything
 ;; Time-stamp: <2010-11-18 11:02:25 rubikitch>
 
 ;; Copyright (C) 2010  rubikitch

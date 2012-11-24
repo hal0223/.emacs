@@ -1,4 +1,4 @@
-﻿;;;; anything-multi-sources.el --- concatenate candidates in multi souces
+;;;; anything-multi-sources.el --- concatenate candidates in multi souces
 
 ;; Copyright (C) 2010  rubikitch
 
