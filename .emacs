@@ -1,18 +1,37 @@
 ;=======================================
 ; 定数設定
 ;=======================================
-; .emacs.dディレクトリパスの指定
-(defconst EMACS_D_DIR "C:/Dropbox/.emacs.d/.emacs.d/")
-;CygwinのPath
-(defconst CYGWIN_PATH "C:/cygwin/bin")
-(defconst FONT_FAMILY "ＭＳ ゴシック")	;;フォントファミリ
-(defconst FONT_SIZE 9)			;;フォントサイズ
-(defconst LINE_SPACING 0.2)		;;行間
+(defconst EMACS_D_DIR "C:/Dropbox/tmp/.emacs/.emacs.d/") ;; .emacs.dディレクトリパスの指定
+(defconst CYGWIN_PATH "C:/cygwin/bin")                   ;; CygwinのPath
+(defconst FONT_FAMILY "ＭＳ ゴシック")                   ;; デフォルトのフォントファミリ
+(defconst FONT_SIZE 9)                                   ;; デフォルトのフォントサイズ
+(defconst LINE_SPACING 0.2)                              ;; 行間
 ; 起動時のフレームサイズと位置
-(defconst LOCATION_Y 0)		;; フレームの左上座標Y(pixel)
-(defconst LOCATION_X 80)	;; フレームの左上座標X(pixel)
-(defconst COL_NUM 100)		;; フレーム幅(列数)
-(defconst ROW_NUM 50)		;; フレーム高(行数)
+(defconst LOCATION_Y 0)                                  ;; フレームの左上座標Y(pixel)
+(defconst LOCATION_X 80)                                 ;; フレームの左上座標X(pixel)
+(defconst COL_NUM 150)                                   ;; フレーム幅(列数)
+(defconst ROW_NUM 75)                                    ;; フレーム高(行数)
+
+
+;=======================================
+; 各PCの設定
+;=======================================
+(cond
+ ((equal (getenv "COMPUTERNAME") "LPC11")
+    (defconst FONT_FAMILY "BDF M+")
+    (defconst FONT_SIZE 7.5)
+    (defconst ROW_NUM 90)
+    )
+ ((equal (getenv "COMPUTERNAME") "ZEN12")
+    (defconst FONT_FAMILY "BDF M+")
+    (defconst ROW_NUM 79)
+    )
+ ((equal (getenv "COMPUTERNAME") "MC07")
+    (defconst EMACS_D_DIR "D:/Dropbox/.emacs.d/.emacs.d/")
+    (defconst CYGWIN_PATH "D:/usr/cygwin//bin")
+    (defconst FONT_FAMILY "BDF M+")
+    )
+ )
 
 ;=======================================
 ; ロードパスの追加
@@ -60,4 +79,3 @@
 ;;Re: .emacs分割のすゝめ  http://d.hatena.ne.jp/holidays-l/20101125/p1
 ;でらうま倶楽部 : 今風のEmacsの設定ってどんな風？ 
 ;http://blog.livedoor.jp/tek_nishi/archives/2524700.html
-

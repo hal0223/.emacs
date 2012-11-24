@@ -12,8 +12,7 @@
 (set-face-background 'mode-line-buffer-id "white")  ; バッファ名の背景色
 (set-face-foreground 'mode-line-buffer-id "black") ; バッファ名の背景色
 (set-face-background 'modeline-inactive "gray80")   ; 非アクティブバッファのモードライン色
-
-;(load-file (concat EMACS_D_DIR "elisp/hiwin.el"))
+(custom-set-faces '(mode-line ((t (:background "tomato" :foreground "white" :box (:line-width -1 :color "tomato"))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 対応する括弧の強調 ;;
