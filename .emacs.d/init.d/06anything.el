@@ -10,7 +10,7 @@
 (add-to-list 'load-path (concat EMACS_D_DIR "elisp/anything/extensions"))
 
 ;;;;;;;;;;;;;;;;;;;;;;
-;; require
+;; init             ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 ;;; Note: anything-config.el loads anything.el.
 (require 'anything-config)
@@ -50,6 +50,9 @@
 ;;;;;;;;;;;;;;;;;;
 ;; 現在開いているバッファ・過去に開いたバッファ
 (define-key global-map [(C \;)] 'main-anything)
+;; 現在開いているバッファ・過去に開いたバッファ
+(define-key global-map [(C x)(C f)] 'anything-find-file)
+
 ;; 登録済みコマンド
 (define-key global-map [(M \;)] 'sub-anything)
 ;; moccur検索
@@ -58,14 +61,95 @@
 (define-key anything-map [(C h)] 'delete-backward-char)
 ;; Grepと同機能だけど重い、かつ指定ディレクトリのバッファをすべて開く
 (define-key global-map [(C M s)] 'dmoccur)
-;; 複数ソースがある場合次のソースへ
-(define-key anything-map [(C \;)] 'anything-next-source)
-;;デフォルトのプレフィックス"F5 a"から"F6 a"へ変更
-(setq anything-command-map-prefix-key "<F6> a")
+;; 拡張kill-ring
+(global-set-key [(M y)] 'anything-kill-ring)
 
-;;;;;;;;;;;;
-;; moccur ;;
-;;;;;;;;;;;;
+;;;;;; 各モードのanything ;;;;;;;;;
+;; lisp-mode
+(define-key emacs-lisp-mode-map [(C \:)] 'anything-browse-code)
+;; org-mode
+(define-key org-mode-map [(C \:)] 'anything-org)
+;; dired-mode
+(define-key dired-mode-map [(C \:)] 'anything-dired)
+
+
+;; 利用できるanything-source一覧を表示
+(global-set-key [(M \;)] 'anything-call-source)
+
+;; 複数ソースがある場合、次のソースをフォーカスする
+(define-key anything-map [(C \;)] 'anything-next-source)
+(define-key anything-map [(C \:)] 'anything-next-source)
+(define-key anything-map [(M \;)] 'anything-next-source)
+
+;;デフォルトのプレフィックス"F5 a"から"F6 a"へ変更
+;;(setq anything-command-map-prefix-key "<F6> a")
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Tips            ;;
+;;;;;;;;;;;;;;;;;;;;;
+;; 利用可能な情報源一覧 : M-x anything-call-source
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; main-anything       ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'recentf-ext)
+(defun main-anything ()
+  (interactive)
+  (anything-other-buffer
+   '(
+     anything-c-source-recentf
+     anything-c-source-buffers+
+     anything-c-source-files-in-current-dir+
+     )
+   "*buffer-anything* ")
+  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; sub-anything       ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+(defun sub-anything ()
+  (interactive)
+  (anything-other-buffer 
+   '(
+     anything-c-source-extended-command-history
+     anything-c-source-favorite-commands
+     ) "*sub-anything* "))
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; anything-kill-ring ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+(defun anything-kill-ring ()
+  (interactive)
+  (anything-other-buffer '(anything-c-source-kill-ring) "*anything-kill-ring* "))
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; anything-browse-code;
+;;;;;;;;;;;;;;;;;;;;;;;;
+(defun anything-browse-code ()
+  (interactive)
+  (anything-other-buffer '(anything-c-source-browse-code) "*anything-browse-code* "))
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; anything-org       ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+(defun anything-org ()
+  (interactive)
+  (anything-other-buffer 
+   '(
+     anything-c-source-org-headline
+     anything-c-source-org-keywords
+     ) "*anything-org* "))
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; anything-dired     ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+(defun anything-dired ()
+  (interactive)
+  (anything-other-buffer '( anything-c-source-files-in-all-dired ) "*anything-dired* "))
+
+;;;;;;;;;;;;;;;;;;;;;;
+;; anything-C-Occur ;;
+;;;;;;;;;;;;;;;;;;;;;;
 ;;; color-moccur.elの設定
 (require 'color-moccur)
 ;; 複数の検索語や、特定のフェイスのみマッチ等の機能を有効にする
@@ -74,58 +158,6 @@
 (setq moccur-grep-default-word-near-point nil)
 (setq moccur-kill-moccur-buffer t)
 
- ;;;;;;;;;;;;;;;;;;;;;
- ;; ソースの追加    ;;
- ;;;;;;;;;;;;;;;;;;;;;
-;; (add-to-list 'anything-sources 'anything-c-source-emacs-commands)
-;;     anything-c-source-extended-command-history
-;;     anything-c-source-filelist
-;;     anything-c-source-emacs-commands
-;;     anything-c-source-info-pages
-;;     anything-c-source-info-elisp
-;;     anything-c-source-man-pages
-;;     anything-c-source-locate
-;;     anything-c-source-emacs-functions
-
- ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- ;; favorite-anything-commands ;;
- ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq fc-file-path (concat EMACS_D_DIR "favorite_command.txt"))
-(defvar anything-c-source-favorite-commands
-  '((name . "favorite commands")
-    (candidates-file fc-file-path updating)
-    (type . command)))
-;; (anything 'anything-c-source-favorite-commands')
-
- ;;;;;;;;;;;;;;;;;;;;;;;;;;
- ;; main-anything
- ;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'recentf-ext)
-(defun main-anything ()
-  (interactive)
-  (anything-other-buffer
-   '(
-     anything-c-source-recentf
-     anything-c-source-buffers+
-     )
-   "*main-anything* ")
-  )
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; sub-anything
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun sub-anything ()
-  (interactive)
-  (anything-other-buffer
-   '(
-     anything-c-source-favorite-commands
-     )
-   "*sub-anything* ")
-  )
-
-;;;;;;;;;;;;;;;;;;;;;;
-;; anything-C-Occur ;;
-;;;;;;;;;;;;;;;;;;;;;;
 ;; migemoがrequireできる環境ならmigemoを使う
 (when (require 'migemo nil t) ;第三引数がnon-nilだとloadできなかった場合にエラーではなくnilを返す
   (setq moccur-use-migemo t))
@@ -137,10 +169,19 @@
       anything-c-moccur-higligt-info-line-flag t	; anything-c-moccur-dmoccurなどのコマンドでバッファの情報をハイライトする
       anything-c-moccur-enable-auto-look-flag t		; 現在選択中の候補の位置を他のwindowに表示する
       anything-c-moccur-enable-initial-pattern 	;anything-c-moccur-occur-by-moccurの起動時にポイントの位置の単語を初期パターンにする
-)
+      )
+
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; favorite-anything-commands ;;
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq fc-file-path (concat EMACS_D_DIR "favorite_command.txt"))
+(defvar anything-c-source-favorite-commands
+  '((name . "favorite commands")
+    (candidates-file fc-file-path updating)
+    (type . command)))
 
  ;;;;;;;;;;;;;;;;;;;;;;;;;
- ;; anything-filelist+  ;;
+;; anything-filelist+  ;;
  ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ファイルリストが古いままだと、新規ファイルが反映されないので、
 ;; rootのcronで自動更新しておきましょう。 
@@ -152,11 +193,11 @@
 (setq anything-grep-candidates-fast-directory-regexp (concat EMACS_D_DIR "elisp/anything-config/"))
 ;; #TODO:もっとスマートに
 (setq anything-c-source-filelist
-  '((name . "FileList")
-    (grep-candidates . anything-c-filelist-file-name)
-    (candidate-number-limit . 200)
-    (requires-pattern . 2)
-    (type . file)))
+      '((name . "FileList")
+        (grep-candidates . anything-c-filelist-file-name)
+        (candidate-number-limit . 200)
+        (requires-pattern . 2)
+        (type . file)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

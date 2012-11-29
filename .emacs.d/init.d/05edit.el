@@ -9,8 +9,6 @@
 (global-set-key [(C z)] 'undo)
 ;; C-hで後ろへ1文字削除
 (global-set-key [(C h)] 'backward-delete-char)
-;; 拡張kill-ring
-(global-set-key [(C M y)] 'browse-kill-ring)
 ;; 置換
 (global-set-key [(C S s)] 'replace-regexp)
 ;;カーソル位置を変えずにスクロール
@@ -41,18 +39,10 @@
 ;;;;;;;;;;
 ;; リージョンを削除できるように
 (delete-selection-mode t)
-;; 拡張kill-ring
-(require 'browse-kill-ring)
 ;; 検索において，大文字・小文字の区別しない．
 (setq-default case-fold-search t)
 ;; インデントのタブを4つのスペースに展開する
 (setq-default tab-width 4 indent-tabs-mode nil)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Kill-ringをクリップボードへコピー ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(cond (window-system
-       (setq x-select-enable-clipboard t)
-       )) 
 ;;自動保存時間を短くする
 (setq auto-save-timeout 10)
 

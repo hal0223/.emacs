@@ -1,7 +1,7 @@
 ;=======================================
 ; 定数設定
 ;=======================================
-(defconst EMACS_D_DIR "C:/Dropbox/tmp/.emacs/.emacs.d/") ;; .emacs.dディレクトリパスの指定
+(defconst EMACS_D_DIR "C:/Dropbox/.emacs/.emacs.d/") ;; .emacs.dディレクトリパスの指定
 (defconst CYGWIN_PATH "C:/cygwin/bin")                   ;; CygwinのPath
 (defconst FONT_FAMILY "ＭＳ ゴシック")                   ;; デフォルトのフォントファミリ
 (defconst FONT_SIZE 9)                                   ;; デフォルトのフォントサイズ

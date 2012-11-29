@@ -1,7 +1,7 @@
 ;;;=======================================
 ;;;言語・文字コードの設定
 ;;;=======================================
-;(setenv "LANG" "ja_JP.sjis")
+(setenv "LANG" "ja_JP.sjis")
 ;;; IME ON/OFF 時にカーソル色を変える。
 (setq ime-activate-cursor-color "Deep Sky Blue")
 (setq ime-inactivate-cursor-color "Deep Pink")
@@ -23,13 +23,13 @@
 ;;ここまでは mw32-ime-initialize の前に入れる
 
 (set-language-environment "Japanese")
-;; (set-default-coding-systems 'sjis)
-;; (prefer-coding-system 'sjis)
-;; (set-terminal-coding-system 'sjis)
-;; (set-keyboard-coding-system 'sjis)
-;; (setq file-name-coding-system 'sjis)
-;; (set-clipboard-coding-system 'sjis-dos)
-;; (set-w32-system-coding-system 'sjis-dos)
+(set-default-coding-systems 'sjis)
+(prefer-coding-system 'sjis)
+(set-terminal-coding-system 'sjis)
+(set-keyboard-coding-system 'sjis)
+(setq file-name-coding-system 'sjis)
+(set-clipboard-coding-system 'sjis-dos)
+(set-w32-system-coding-system 'sjis-dos)
 
 (set-input-method "W32-IME")
 (w32-ime-initialize)  ;; IME の初期化

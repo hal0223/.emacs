@@ -95,7 +95,8 @@
              prompt (expand-file-name (match-string 1 sel) arfn-dir) nil require-match (match-string 2 sel) predicate additional-attrs))
            (anything-update)))))
 
-(defun* anything-read-file-name (prompt &optional dir default-filename require-match initial-input predicate (additional-attrs '((action . identity))))
+(defun* anything-read-file-name 
+  (prompt &optional dir default-filename require-match initial-input predicate (additional-attrs '((action . identity))))
   "`anything' replacement for `read-file-name'."
   (setq arfn-followed nil)
   (let* ((anything-map (anything-read-file-name-map))
